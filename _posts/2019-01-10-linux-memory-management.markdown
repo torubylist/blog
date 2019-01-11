@@ -190,7 +190,7 @@ top也是经常使用的．关注几个比较重要的数据．
 
 
 
-  [1]: https://time.geekbang.org/column/article/74272
+  [1]: https://static001.geekbang.org/resource/image/fc/b6/fcfbe2f8eb7c6090d82bf93ecdc1f0b6.png
   [2]: https://static001.geekbang.org/resource/image/b5/25/b5c9179ac64eb5c7ca26448065728325.png
   [3]: https://static001.geekbang.org/resource/image/71/5d/71a754523386cc75f4456a5eabc93c5d.png
   [4]: https://segmentfault.com/a/1190000008125006#articleHeader6

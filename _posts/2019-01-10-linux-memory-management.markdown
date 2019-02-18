@@ -3,7 +3,7 @@ layout:     post
 title:      "Linux内存管理概述"
 subtitle:   "linux memory"
 date:       2019-01-10 21:00:00
-author:     "木亘"
+author:     "倔强蜗牛"
 header-img: "img/post-bg-unix-linux.jpg"
 tags:
     - Linux

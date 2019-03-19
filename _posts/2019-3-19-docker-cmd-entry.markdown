@@ -13,29 +13,29 @@ tags:
 
 我们都知道CMD指令和ENTRYPOINT指令的作用都是为镜像指定容器启动后的命令，那他们的缺别大吗？为什么需要两个启动命令呢？
 
-### CMD使用方式
+## CMD使用方式
 - CMD  ["executable", "param1", "param2"]　使用exec执行，推荐方式
 - CMD command param1 param2　在/bin/sh中执行，提供给需要交互的应用
 - CMD ["param1", "param2"] 给ENTRYPOINT提供默认参数
 每个Dockerfile只能有一条CMD命令生效，如果指定了多条，只有最后一条生效．
 
-### ENTRYPOINT使用方式
+## ENTRYPOINT使用方式
 - ENTRYPOINT ["executable", "param1", "param2"]
 - ENTRYPOINT command param1 param2
 每个Dockerfile只有一条ENTRYPOINT生效，当存在多个时，只有最后一条生效
 
-#### 共同点
+### 共同点
 1. 都可以指定shell或者exec函数调用的方式执行命令
 2. 当存在多个CMD或者ENTRYPOINT时候，只有最后一条生效
 
-#### 差异
+### 差异
 1. CMD指定的容器启动命令可以被docker run指定的命令覆盖，而ENTRYPOINT指定的命令则不会被覆盖．而是将docker run指定的参数当作是ENTRYPOINT指定命令的参数．
 2. CMD指令可以为ENTRYPOINT指令设置默认参数，而且可以被docker run指定的参数覆盖．
 
-###差异测试1
+#### 差异测试1
 > CMD指令指定的容器启动时命令可以被docker run指定的命令覆盖，而ENTRYPOINT则不会，而是将docker run的命令当作entrypoint的参数．
 
-#####通过CMD方式启动容器
+##### 通过CMD方式启动容器
 ```
 cat startuparg.sh 
 #!/bin/bash
@@ -81,7 +81,7 @@ In Startup, args:
 docker run -ti --rm=true entrytest:live /bin/bash -c 'echo Hello'
 In Startup, args: /bin/bash -c echo hello
 ```
-### 差异测试２
+#### 差异测试２
 > CMD指令可以为ENTRYPOINT指令设置默认参数，而且可以被docker run指定的参数覆盖．
 
 CMDENTRYDockerfile

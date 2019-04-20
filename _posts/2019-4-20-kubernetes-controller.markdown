@@ -127,7 +127,7 @@ queue :=
 workqueue.NewRateLimitingQueue(workqueue.DefaultControllerRateLimiter())
 ```
 Workqueue提供了管理键值的便利功能。 下图描述了Workqueue中键值的生命周期：
-![Workqueue Life Cycle](../img/key-lifecicle-workqueue)
+![Workqueue Life Cycle][1]
 
 在处理事件时失败的情况下，控制器调用AddRateLimited（）函数将其键返回到工作队列，以便稍后使用预定义的重试次数进行处理。 否则，如果进程成功，则可以通过调用Forget（）函数从工作队列中删除键值。但是，该功能仅阻止工作队列跟踪事件的历史记录，为了从工作队列中完全删除事件，控制器必须触发Done（）函数。
 
@@ -158,4 +158,4 @@ controller.runWorker()
 ### 参考
 [a-deep-dive-into-kubernetes-controller](https://engineering.bitnami.com/articles/a-deep-dive-into-kubernetes-controllers.html)
   
-  [1]: https://engineering.bitnami.com/images/kubernetes-controller/key-lifecicle-workqueue.png
+  [1]: https://github.com/torubylist/blog/blob/master/img/key-lifecicle-workqueue.png?raw=true

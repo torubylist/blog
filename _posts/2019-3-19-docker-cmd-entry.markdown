@@ -4,7 +4,7 @@ title:      "详细解读Dockerfile CMD和ENTRYPOINT"
 subtitle:   "Dockerfile CMD ENTRYPOINT"
 date:       2019-03-19 21:00:00
 author:     "倔强蜗牛"
-header-img: "img/post-bg-dockerfile-cmd-entrypoint.png"
+header-img: "img/post-bg-docker.png"
 tags:
     - Dockerfile
     - CMD

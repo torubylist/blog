@@ -10,6 +10,7 @@ tags:
     - 内存分配器
 ---
 
+
 ## Motivation（动机）
 *TCMalloc*比*glibc 2.3 malloc*（被一个名叫ptmalloc2的独立库提供）和我测试的其他malloc更快。 *ptmalloc2*需要大约300ns才能在2.8 GHz的P4上执行malloc/free对（小对象）。 相同的操作下，*TCMalloc*实现大约需要花费50ns。 速度对于malloc实现很重要，因为如果malloc不够快，应用程序编写者倾向于在malloc之上编写自定义空闲列表。 这可能会导致额外的复杂性和更多的内存使用，除非应用程序编写者非常小心地调整空闲列表的大小并从空闲列表中清除空闲对象。
 

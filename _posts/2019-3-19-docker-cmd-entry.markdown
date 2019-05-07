@@ -3,7 +3,7 @@ layout:     post
 title:      "详细解读Dockerfile CMD和ENTRYPOINT"
 subtitle:   "Dockerfile CMD ENTRYPOINT"
 date:       2019-03-19 21:00:00
-author:     "倔强蜗牛"
+author:     "会飞的蜗牛"
 header-img: "img/snow-bg-mountain.jpg"
 tags:
     - Dockerfile

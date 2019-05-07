@@ -3,7 +3,7 @@ layout:     post
 title:      "[译]深入理解kubernetes controller"
 subtitle:   "Controller in kubernetes"
 date:       2019-04-20 21:00:00
-author:     "倔强蜗牛"
+author:     "会飞的蜗牛"
 header-img: "img/pexel-landscape-bg-20190420.jpeg"
 tags:
     - Kubernetes

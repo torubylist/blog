@@ -3,7 +3,7 @@ layout:     post
 title:      "工作中遇到的问题--git/docker"
 subtitle:   "issues in work"
 date:       2019-01-29 21:00:00
-author:     "倔强蜗牛"
+author:     "会飞的蜗牛"
 header-img: "img/post-bg-unix-linux.jpg"
 tags:
     - Git

@@ -3,7 +3,7 @@ layout:     post
 title:      "HTTP Idempotence"
 subtitle:   "http restapi"
 date:       2019-02-18 21:00:00
-author:     "倔强蜗牛"
+author:     "会飞的蜗牛"
 header-img: "img/http-restapi.jpg"
 tags:
     - http

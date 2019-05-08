@@ -1,10 +1,10 @@
 # Site settings
 title: 会飞的蜗牛
 SEOTitle: 会飞的蜗牛 | Jason Blog
-header-img: img/home-bg.jpg
+header-img: img/homepage-bg.jpg
 #email: yongpingzhao1@gmail.com
-description: ""
-keyword: ""
+description: "分享生活，留住感动"
+keyword: "Just TOT"
 url: "http://torubylist.github.io"              # your host, for absolute URL
 baseurl: "/"         # for example, '/blog' if your blog hosted on 'host/blog'
 

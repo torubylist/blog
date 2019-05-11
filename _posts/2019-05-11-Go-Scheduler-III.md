@@ -1,3 +1,4 @@
+---
 layout:     post
 title:      "[译]Go调度III-并发"
 subtitle:   "Go Scheduler III - Concurrency"

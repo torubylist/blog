@@ -1,4 +1,16 @@
-# [译]Go调度器 II
+---
+layout:     post
+title:      "[译]Go调度 II - Go调度器"
+subtitle:   "Go Scheduler II - Go Scheduler"
+date:       2019-05-11 21:00:00
+author:     "会飞的蜗牛"
+header-img: "img/go-scheduler-ii.jpg"
+tags:
+    - Go调度器
+    - Go Scheduler
+---
+
+
 
 ## 前言
 这是三篇文章中的第一篇来帮助我们更好地理解Go调度器背后的机制和语法，所以本文将着重讲述GO语言调度器。

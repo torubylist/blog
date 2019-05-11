@@ -1,13 +1,13 @@
 ---
 layout:     post
-title:      "[译]Go调度器I"
-subtitle:   "Go Scheduler I"
+title:      "[译]Go调度I-操作系统调度器"
+subtitle:   "Go Scheduler I - OS Scheduler"
 date:       2019-05-9 21:00:00
 author:     "会飞的蜗牛"
 header-img: "img/go-scheduler-i.jpg"
 tags:
-    - 调度器
-    - Go Scheduler
+    - 操作系统调度器
+    - OS Scheduler
 ---
 
 

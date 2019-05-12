@@ -31,5 +31,13 @@ tags:
 
 	Go运行时会忽略由C.malloc等函数分配的任何内存。如果C内存包含指向Go内存的指针，程序需要确保指针也存储在Go变量，结构或数组中。
 	
-	## 原文
+>非法指针一般包括悬空指针和野指针，没有指向有效对象的指针。在C/C++等语言中，悬空指针（Dangling Pointer）指的是：一个指针的指向对象已被删除，那么就成了悬空指针。野指针是那些未初始化的指针。
+>野指针通常是因为指针变量中保存的值不是一个合法的内存地址而造成的。
+>合法的内存地址：
+>1.在堆空间动态申请的；
+>2.局部变量所在的栈。	
+	
+	
+	## 参考
 	<https://groups.google.com/forum/#!msg/golang-nuts/yNis7bQG_rY/yaJFoSx1hgIJ>
+	<https://www.cnblogs.com/idorax/p/6475941.html>

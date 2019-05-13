@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "[译]Go调度 II - Go调度器"
+title:      "[译]Go调度II - Go调度器"
 subtitle:   "Go Scheduling II - Go Scheduler"
 date:       2019-05-11 21:00:00
 author:     "会飞的蜗牛"

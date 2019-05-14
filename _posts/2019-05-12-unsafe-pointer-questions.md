@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "[译]关于unsafe.Pointer的几个问题"
+title:      "关于unsafe.Pointer的几个问题"
 subtitle:   "Some questions about unsafe.Pointer"
 date:       2019-05-12 21:00:00
 author:     "会飞的蜗牛"

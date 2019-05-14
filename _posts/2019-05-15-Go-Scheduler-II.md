@@ -17,10 +17,10 @@ tags:
 
 三篇系列文章的地址：
 
-1. [Scheduling In Go : Part I - OS Scheduler](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html)
-2. [Scheduling In Go : Part II - Go Scheduler](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html)
-3. [Scheduling In Go : Part III - Concurrency](https://www.ardanlabs.com/blog/2018/12/scheduling-in-go-part3.html)
 
+1. [Scheduling In Go : Part I - OS Scheduler](https://torubylist.github.io/blog/2019/05/09/Go-Scheduler-I/)
+2. [Scheduling In Go : Part II - Go Scheduler](https://torubylist.github.io/blog/2019/05/11/Go-Scheduler-II/)
+3. [Scheduling In Go : Part III - Concurrency](https://torubylist.github.io/blog/2019/05/12/Go-Scheduler-III/)
 ## 简介
 在调度器系列文章的第一章中，我讲述了操作系统调度器的部分知识，因为我认为那对我们理解Go调度器背后的语法至关重要。在这篇文章中，我将在语法层面讲述解释Go调度器如何工作以及更高层次的行为。Go调度器是个非常复杂的系统，小的细枝末节对我们来说并不重要。重要的是有一个很好的模型让系统正常工作。这将有助你做出更好的工程决策。
 

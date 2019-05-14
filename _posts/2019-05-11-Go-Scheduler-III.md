@@ -17,9 +17,9 @@ tags:
 
 三篇系列文章的地址：
 
-1. [Scheduling In Go : Part I - OS Scheduler](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html)
-2. [Scheduling In Go : Part II - Go Scheduler](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html)
-3. [Scheduling In Go : Part III - Concurrency](https://www.ardanlabs.com/blog/2018/12/scheduling-in-go-part3.html)
+1. [Scheduling In Go : Part I - OS Scheduler](https://torubylist.github.io/blog/2019/05/09/Go-Scheduler-I/)
+2. [Scheduling In Go : Part II - Go Scheduler](https://torubylist.github.io/blog/2019/05/11/Go-Scheduler-II/)
+3. [Scheduling In Go : Part III - Concurrency](https://torubylist.github.io/blog/2019/05/12/Go-Scheduler-III/)
 
 ## 简介
 

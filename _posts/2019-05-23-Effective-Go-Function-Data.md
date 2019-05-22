@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "高效Go语言-函数-数据结构"
-subtitle:   " \"Effective-Function-Data\""
+subtitle:   " \"Effective-Go-Function-Data\""
 date:       2019-05-23 20:00:00
 author:     "会飞的蜗牛"
 header-img: "img/effective-go.jpg"
@@ -11,8 +11,6 @@ tags:
     - Effective-go
     
 ---
-
-@[TOC]目录
 
 ## 函数
 ### 多返回值

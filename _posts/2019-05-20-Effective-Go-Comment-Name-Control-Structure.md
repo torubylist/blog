@@ -1,8 +1,8 @@
 ---
 layout:     post
 title:      "高效Go语言-注释-名字-控制结构"
-subtitle:   " \"Effective-Comment-Names-Control-Structure\""
-date:       2019-05-23 20:00:00
+subtitle:   " \"Effective-Go-Comment-Names-Control-Structure\""
+date:       2019-05-22 20:00:00
 author:     "会飞的蜗牛"
 header-img: "img/effective-go.jpg"
 tags:
@@ -13,8 +13,6 @@ tags:
 
 ---
 
-
-[TOC]
 
 ---
 ## 简介

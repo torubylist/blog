@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "kubectl run背后的征途大海"
+title:      "kubectl run背后的征途"
 subtitle:   " \"what-happens-when-k8s-edition...\""
 date:       2019-05-26 20:00:00
 author:     "会飞的蜗牛"

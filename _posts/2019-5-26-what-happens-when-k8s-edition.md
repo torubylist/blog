@@ -65,7 +65,7 @@ Kubernetes最令人惊叹的事情之一，就是它通过对用户友好的API�
 # kube-apiserver
 
 ## Authentication（认证）
-所以我们的请求已经发送，万岁！那接下来是什么？kube-apiserver走进我们的视野了。正如我们前文所述，kube-apiserver是客户端和系统组件用来持久化和检索集群状态的主要接口。要执行其功能，首先它需要能够验证请求者的身份。此过程称为身份验证。
+所以我们的请求已经发送，万岁！那接下来是什么？走进我们的视野的是kube-apiserver。正如我们前文所述，kube-apiserver是客户端和系统组件用来持久化和检索集群状态的主要接口。要执行其功能，首先它需要能够验证请求者的身份。此过程称为身份验证。
 
 那apiserver如何验证请求者的身份？当服务器首次启动时，它会查看用户提供的所有[CLI](https://kubernetes.io/docs/admin/kube-apiserver/)标志，并组装合适的验证器列表。我们举个例子：如果传入了`--client-ca-file`，它会附加 x509 身份验证器. 如果设置了`--token-auth-file`，它会将令牌验证器附加到列表中。每次收到请求时，都会运行[身份验证器链](https://github.com/kubernetes/apiserver/blob/51bebaffa01be9dc28195140da276c2f39a10cd4/pkg/authentication/request/union/union.go#L54)，直到成功为止：
 
@@ -222,7 +222,7 @@ Informer是一种模式，允许控制器订阅存储事件并轻松列出他们
 
 附注：自定义调度程序：有趣的是predicate和priority函数都是可扩展的，可以使用--policy-config-file标志来自定义。这引入了一定程度的灵活性，管理员还可以在独立部署中运行自定义调度程序（具有自定义处理逻辑的控制器）。如果PodSpec包含schedulerName，Kubernetes会将该pod的调度移交给在该schdedulerName下注册的调度程序。
 
-#Kubelet
+# Kubelet
 ## Pod同步
 好吧，所有的 Controller 都完成了工作！总结一下：
 
@@ -251,7 +251,7 @@ Informer是一种模式，允许控制器订阅存储事件并轻松列出他们
 8. 从 Apiserver 中[检索](https://github.com/kubernetes/kubernetes/blob/dd9981d038012c120525c9e6df98b3beb3ef19e1/pkg/kubelet/kubelet_pods.go#L788) Spec.ImagePullSecrets 中定义的所有 Secrets，以便接下来可以将它们注入容器中。
 9. 最后容器运行时运行容器（在下面更详细地描述）
 
-## CRI and pause containers（容器运行时和Pause容器）
+## CRI and pause containers（容器运行时接口和Pause容器）
 我们现在完成了大部分启动设置，并且容器已准备好启动。执行此启动任务的程序称为容器运行时 Container Runtime（例如docker或rkt）。
 
 为了让 kubelet 更具可扩展性，自 v1.5.0 以来的 kubelet 一直使用一个名为 CRI（容器运行时接口）的接口来与具体的容器运行时进行交互。简而言之，CRI 提供了 kubelet 和特定运行时实现之间的接口抽象。通过 [protocol buffer](https://github.com/google/protobuf)（像一个更快的 JSON ）和一个 [gRPC API](https://grpc.io/)（一种非常适合执行 Kubernetes 操作的 API ）进行通信。这是一个非常酷的想法，因为通过在 kubelet 和运行时之间使用已定义的契约，容器编排方式的具体实现细节变得无关紧要。重要的是协议约定，这允许以最小的开销添加新的运行时，因为 Kubernetes 核心代码完全无需更改！
@@ -267,7 +267,7 @@ Informer是一种模式，允许控制器订阅存储事件并轻松列出他们
 一旦创建好了 pause 容器，下面就会开始检查磁盘状态然后开始启动业务容器。
 
 
-## CNI and pod networking
+## CNI and pod networking（容器网络接口和pod网络）
 我们的Pod现在有了它的骨架：一个“pause”容器，它托管所有命名空间以允许pod间通信。但网络如何运作以及如何建立网络呢？
 
 当kubelet为pod设置网络时，它将任务委托给 “CNI” 插件。CNI 代表 Container Network Interface，其运行方式与 Container Runtime Interface 类似。简而言之，CNI 是一种抽象，允许不同的网络提供商对容器使用不同的网络实现。通过 stdin 将 JSON 数据（配置文件位于 /etc/cni/net.d 中）传输到相关的 CNI 二进制文件（位于/ opt/cni/bin 中），在 kubelet 里注册插件并与它们进行交互。 这是 JSON 配置的示例：

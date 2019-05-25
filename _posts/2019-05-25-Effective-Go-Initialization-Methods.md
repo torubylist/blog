@@ -2,7 +2,7 @@
 layout:     post
 title:      "高效Go语言-初始化-方法-接口"
 subtitle:   " \"Effective-Go-Initialization-Methods-Interfaces\""
-date:       2019-05-26 20:00:00
+date:       2019-05-25 20:00:00
 author:     "会飞的蜗牛"
 header-img: "img/effective-go.jpg"
 tags:

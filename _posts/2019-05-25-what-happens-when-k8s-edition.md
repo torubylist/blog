@@ -2,7 +2,7 @@
 layout:     post
 title:      "kubectl run背后的征途"
 subtitle:   " \"what-happens-when-k8s-edition...\""
-date:       2019-05-25 20:00:00
+date:       2019-05-25 22:00:00
 author:     "会飞的蜗牛"
 header-img: "img/what-happens-when-k8s-edition.jpg"
 tags:

@@ -2,13 +2,15 @@
 layout:     post
 title:      "kubectl run背后的征途"
 subtitle:   " \"what-happens-when-k8s-edition...\""
-date:       2019-05-26 20:00:00
+date:       2019-05-25 20:00:00
 author:     "会飞的蜗牛"
 header-img: "img/what-happens-when-k8s-edition.jpg"
 tags:
     - Kubernetes
 
 ---
+
+> 翻译主要是为了更好的掌握文中的内容，如有不妥之处或者想我交流，欢迎随时给我发邮件，谢谢。yongpingzhao1#gmail.com
 
 假如我想部署一个nginx服务到kubernetes集群上，我很可能会在终端上输入：
 

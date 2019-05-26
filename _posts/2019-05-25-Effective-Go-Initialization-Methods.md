@@ -9,6 +9,7 @@ tags:
     - Initialization
     - Methods
     - Effective-Go
+    
 ---
 
 > 翻译主要是为了更好的掌握文中的内容，如有不妥之处或者想我交流，欢迎随时给我发邮件，谢谢。yongpingzhao1#gmail.com

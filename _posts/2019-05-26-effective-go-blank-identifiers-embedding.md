@@ -8,8 +8,6 @@ header-img: "img/effective-go.jpg"
 tags:
     - Blank Identifier
     - Embeding
-    - Concurrency
-    - Errors
     
 ---
 > 翻译主要是为了更好的掌握文中的内容，如有不妥之处或者想我交流，欢迎随时给我发邮件，谢谢。yongpingzhao1#gmail.com
@@ -87,10 +85,10 @@ func main() {
 }
 ```
 
-按照惯例，消除导入错误的声明应该在导入之后立即进行，并进行注释，便于查找和提醒方便以后清理。
+按照惯例，消除导入错误的声明应该在导入之后立即进行，并进行注释，便于查找，方便清理。
 
 
-## 为副作用导入
+## 副作用式导入
 最终，上一个示例中未使用的导入（如fmt或io）应该被使用或者删除。空白赋值将代码标识为WIP。 但有时有用的是包的副作用，代码中无需显示使用包。例如，在init函数期间，net/http/pprof包会注册提供调试信息的HTTP处理程序。它有一个导出的API，但大多数客户端只需要处理程序注册并通过网页访问其数据。要是仅仅为了包的副作用导入包，请将包重命名为空标识符：
 
 ```
@@ -117,7 +115,7 @@ if _, ok := val.(json.Marshaler); ok {
 }
 ```
 
-出现这种情况的一个原因必须确保在包中实现了满足该接口的类型。如果一个类型，例如json.RawMessage，需要一个自定义的JSON编码，它应该实现json.Marshaler，但没有静态转换，编译器就不会自动验证这一点。 如果类型无意中没有满足该接口，则JSON编码器仍然可以工作，但不会使用自定义实现。为了保证实现正确，可以在包中使用使用空标识符的全局声明：
+出现这种情况的一个原因必须确保在包中实现了满足该接口的类型。如果一个类型，例如json.RawMessage，需要一个自定义的JSON编码，它应该实现json.Marshaler，但没有静态转换，编译器就不会自动验证这一点。 如果类型无意中没有满足该接口，则JSON编码器仍然可以工作，但不会使用自定义实现。为了保证接口实现正确，可以在包中使用使用空标识符的全局声明：
 
 ```
 var _ json.Marshaler = (*RawMessage)(nil)
@@ -152,9 +150,9 @@ type ReadWriter interface {
 }
 ```
 
-这看起来就如他所示：一个ReadWriter既能做Reader的事情也可以做Writer的事情。这是一个嵌入接口的联合体（这些接口的方法不能有交集）。只有接口能够嵌入接口。
+这看起来就如它定义所示：一个ReadWriter既能做Reader的事情也可以做Writer的事情。这是一个嵌入接口的联合体（这些接口的方法不能有交集）。注意：只有接口能够嵌入接口。
 
-类似的想法也可以应用于结构体的定义，其实现稍稍复杂一些。bufio包有两个结构类型，bufio.Reader和bufio.Writer，它们分别实现了io包的类似接口。bufio还实现了一个缓冲的reader/writer，它通过使用嵌入将读取器和写入器组合到一个结构中来实现：它列出了结构体中的类型但却不给它们字段命名。
+类似的想法也可以应用于结构体的定义，其实现稍稍复杂一些。bufio 包有两个结构类型， bufio.Reader 和 bufio.Writer，它们分别实现了 io 包的类似接口。bufio 还实现了一个缓冲的 reader/writer，它通过使用嵌入将 reader 和 writer 组合到一个结构中来实现：列出了结构体中的类型但却不命名。
 
 ```
 // ReadWriter stores pointers to a Reader and a Writer.
@@ -165,7 +163,7 @@ type ReadWriter struct {
 }
 ```
 嵌入的元素是结构体的指针，当然必须初始化以指向有效的结构体，然后才能使用它们。该
-ReadWriter结构可以写成
+ReadWriter结构也可以写成
 
 ```
 type ReadWriter struct {
@@ -174,7 +172,7 @@ type ReadWriter struct {
 }
 ```
 
-但是为了提升字段的方法使其满足io接口，我们还需要提供转发方法，如下所示：
+但是为了满足 io 接口，必须提升字段的方法，我们必须提供一个转发方法，如下所示：
 
 ```
 func (rw *ReadWriter) Read(p []byte) (n int, err error) {
@@ -193,13 +191,13 @@ type Job struct {
     *log.Logger
 }
 ```
-现在，Job类型具有Print，Printf，Println和*log.Logger的其他方法。当然，我们可以给Logger一个字段名称，但是没有必要这样做。现在，一旦初始化，我们就可以记录Job：
+现在，Job 类型具有 Print，Printf，Println 和 *log.Logger 的其他方法。当然，我们可以给 Logger 一个字段名称，但是没有必要这样做。现在，一旦初始化，我们就可以记录 Job：
 
 ```
 job.Println("starting now...")
 ```
 
-Logger是Job结构体的常规字段，因此我们可以在Job的构造函数中以常规的方式初始化它，就像这样，
+Logger 是 Job 结构体的常规字段，因此我们可以在Job的构造函数中以常规的方式初始化它，就像这样，
 
 
 ```
@@ -214,7 +212,7 @@ func NewJob(command string, logger *log.Logger) *Job {
 job := &Job{command, log.New(os.Stderr, "Job: ", log.Ldate)}
 ```
 
-如果我们需要直接引用嵌入字段，则忽略包限定符，将字段的类型名称用作字段名称，就像ReadWriter结构的Read方法中一样。在这里，如果我们需要访问Job变量作业的*log.Logger，我们将编写job.Logger，如果我们想要优化Logger的方法，这将非常有用。
+如果我们需要直接引用嵌入字段，则忽略包限定符，将字段的类型名称用作字段名称，就像 ReadWriter 结构的 Read 方法中一样。在这里，如果我们需要访问 Job 变量作业的 *log.Logger，我们将编写 job.Logger，如果我们想要优化 Logger 的方法，这将非常有用。
 
 ```
 func (job *Job) Printf(format string, args ...interface{}) {
@@ -224,7 +222,7 @@ func (job *Job) Printf(format string, args ...interface{}) {
 
 内嵌类型引入了命名冲突的问题，但要解决这个问题也不难。
 
-首先，如果内嵌类型跟外部类型有相同的字段或者方法X，则内嵌的字段或方法X会被隐藏. 如果log.Logger包含一个名为Command的字段或方法，则Job的Command字段将占主导地位。
+首先，如果内嵌类型跟外部类型有相同的字段或者方法X，则内嵌的字段或方法 X 会被隐藏. 如果 log.Logger 包含一个名为 Command 的字段或方法，则 Job 的 Command 字段将占主导地位。
 
-其次，同一名称出现在同一嵌套级别是错误的，如果Job结构包含另一个名为Logger的字段或方法，则嵌入log.Logger就是错误的。但是，如果重复名称在类型定义之外的程序中从未使用过，则不会导致错误。这个限定为在外部进行类型嵌入修改提供了保护。如果新添加的字段与另一个子类型中的字段冲突，如果该字段没有被访问过），也同样不会有问题。
+其次，同一名称出现在同一嵌套级别是错误的，如果 Job 结构已经包含另一个名为 Logger 的字段或方法，那么再嵌入 log.Logger 就是错误的。但是，如果重复名称在类型定义之外的程序中从未使用过，则不会产生错误。这个限定为在外部进行类型嵌入修改提供了保护。如果新添加的字段与另一个子类型中的字段冲突，如果该字段没有被访问过，也同样不会有问题。
 

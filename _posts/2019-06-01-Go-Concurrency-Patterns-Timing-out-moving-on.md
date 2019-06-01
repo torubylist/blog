@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Go并发模型-超时处理"
+title:      "Go并发模式-超时处理"
 subtitle:   " \"Go Concurrency Patterns: Timing out, moving on\""
 date:       2019-06-01 20:00:00
 author:     "会飞的蜗牛"
@@ -66,3 +66,6 @@ func Query(conns []Conn, query string) Result {
 这两个例子说明了Go可以简单地实现goroutines之间的复杂交互。
 
 By Andrew Gerrand
+
+## 原文
+<https://blog.golang.org/go-concurrency-patterns-timing-out-and>

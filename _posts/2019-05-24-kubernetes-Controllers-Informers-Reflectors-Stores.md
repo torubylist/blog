@@ -11,6 +11,7 @@ tags:
     - Informer
     - Reflector
     - Store
+    
 ---
 
 > 翻译主要是为了更好的掌握文中的内容，如有不妥之处，请给我发邮件，谢谢。yongpingzhao1#gmail.com
@@ -23,11 +24,11 @@ tags:
 1 jm.jobStore.Store, jm.jobController = framework.NewInformer(
 2  &cache.ListWatch{
 3    ListFunc: func(options api.ListOptions) (runtime.Object, error) {
-4       // Direct call to the API server, using the job client
+4       // 使用jobClient直接调用kubernetes的api
 5      return jm.kubeClient.Batch().Jobs(api.NamespaceAll).List(options)
 6    },
 7    WatchFunc: func(options api.ListOptions) (watch.Interface, error) {
-8      // Direct call to the API server, using the job client
+8      // 使用jobClient直接调用kubernetes的api
 9     return jm.kubeClient.Batch().Jobs(api.NamespaceAll).Watch(options)
 10    },
 11  },
@@ -98,8 +99,7 @@ tags:
 47       
 48		 //	fifo的KeyOf函数是最容易的，因为它处理
 49		 // DeletedFinalStateUnknown 制造者
-50      // fifo's KeyOf is easiest, because it handles
-51      // DeletedFinalStateUnknown markers.
+51      
 52      key, err := fifo.KeyOf(newest.Object)
 53      if err != nil {
 54        return err
@@ -226,7 +226,7 @@ Process 循环包含将系统的当前状态达成期望状态的逻辑。进程
 8 
 9   // 显式的将资源版本设置为“0”，这对List()来说是可以的。
 10  // 为了从cache中获取数据，跟etcd内容有关的可能会被推迟
-11  // etcd contents. Reflector框架最终会定期通过Watch()获取数据
+11  // Reflector框架最终会定期通过Watch()获取数据
 12   options := api.ListOptions{ResourceVersion: "0"}
 13   // 初次调用List.
 14   list, err := r.listerWatcher.List(options)

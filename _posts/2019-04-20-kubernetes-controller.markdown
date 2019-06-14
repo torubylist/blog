@@ -26,6 +26,7 @@ kubernetes集群上运行着许多的线程，这些线程的主要任务就是�
 这段引言的意思是说，在机器人与自动化的应用里，控制循环是一个非终止循环，用于调节系统状态。而在kubernetes里面，controller是一个通过apiserver监听集群共享状态，并进行更改以尝试将当前状态移至期望状态的控制循环。如今，与Kubernetes一起提供的控制器示例包括ReplicaController，EndpointController，Namespace Controller和ServiceAccounts Controller等。
 
 为了降低复杂性，所有控制器都打包并运送到名为kube-controller-manager的单个守护程序中。 控制器最简单的实现是循环：
+
 ```
 for {
   desired := getDesiredState()
@@ -41,6 +42,7 @@ for {
 Kubernetes控制器的重要作用是观察对象的期望状态和实际状态的，然后发送指令以使实际状态更像所需状态。为了获取对象的信息，控制器向Kubernetes API服务器发送请求。
 
 但是，反复从API服务器获取信息可能会变得昂贵。 因此，为了在代码中多次获取和列出对象，Kubernetes开发人员最终使用已经由client-go库提供的缓存。 此外，控制器并不真的想要连续发送请求。 它只关心创建，修改或删除对象时的事件。 client-go库提供Listwatcher接口，该接口执行初始列表并在特定资源上启动监视：
+
 ```
 lw := cache.NewListWatchFromClient(
       client,
@@ -49,6 +51,7 @@ lw := cache.NewListWatchFromClient(
       fieldSelector)
 ```
 所有这些事件都是在Informer中消费。Informer的一般结构如下所述：
+
 ```
 store, controller := cache.NewInformer {
 	&cache.ListWatch{},
@@ -60,6 +63,7 @@ store, controller := cache.NewInformer {
 
 ##### ListWatcher
 Listwatcher是特定命名空间中特定资源的列表函数和监听函数的组合。 这有助于控制器只关注它想要查看的特定资源。 字段选择器是一种过滤器，用于缩小搜索资源的结果，比如控制器想要检索与特定字段匹配的资源。Listwatcher的结构如下所述：
+
 ```
 cache.ListWatch {
 	listFunc := func(options metav1.ListOptions) (runtime.Object, error) {
@@ -83,8 +87,10 @@ cache.ListWatch {
 }
 
 ```
+
 ##### ResourceEventHandler
 资源事件处理程序是控制器处理特定资源更改通知的地方：
+
 ```
 type ResourceEventHandlerFuncs struct {
 	AddFunc    func(obj interface{})
@@ -92,6 +98,7 @@ type ResourceEventHandlerFuncs struct {
 	DeleteFunc func(obj interface{})
 }
 ```
+
 * AddFunc 创建新资源时会调用它。
 * UpdateFunc 修改现有资源时会调用。oldObj是资源的最后已知状态。 重新同步发生时也会调用UpdateFunc，即使没有任何更改也会调用它，会对比资源的resourceVersion。
 * DeleteFunc 删除现有资源时会调用。
@@ -122,6 +129,7 @@ SharedInformer无法跟踪每个控制器的位置（因为它是共享的），
 Workqueue在client-go/util/workqueue的client-go库中提供。 支持的队列有几种，包括延迟队列，定时队列和速率限制队列。
 
 以下是创建速率限制队列的示例：
+
 ```
 queue :=
 workqueue.NewRateLimitingQueue(workqueue.DefaultControllerRateLimiter())
@@ -138,6 +146,7 @@ Workqueue提供了管理键值的便利功能。 下图描述了Workqueue中键�
 2. 对单个资源的多个快速更新将由缓存/队列折叠到最新版本中。 因此，它必须等到缓存变为空闲才能实际处理项目，以避免在中间状态上浪费工作。
 
 伪代码如下：
+
 ```
 controller.informer = cache.NewSharedInformer(...)
 controller.queue = workqueue.NewRateLimitingQueue(workqueue.DefaultControllerRateLimiter())

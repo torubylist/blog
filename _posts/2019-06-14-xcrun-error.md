@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "xcrun"
+title:      "xcrun错误"
 subtitle:   " \"xcrun错误\""
 date:       2019-06-14 20:00:00
 author:     "会飞的蜗牛"

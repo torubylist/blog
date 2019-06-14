@@ -2,7 +2,7 @@
 layout:     post
 title:      "高效Go语言-并发-错误处理"
 subtitle:   " \"Effective-Go-Concurrency-Errors\""
-date:       2019-06-15 20:00:00
+date:       2019-06-15 15:00:00
 author:     "会飞的蜗牛"
 header-img: "img/effective-go.jpg"
 tags:

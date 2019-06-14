@@ -164,8 +164,11 @@ func (c *Controller) processNextWorkItem() bool {
 	return true
 }
 
-
 ```
+
+## 参考
+<https://github.com/kubernetes/community/blob/8decfe4/contributors/devel/controllers.md>
+
 
 
 

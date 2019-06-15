@@ -13,6 +13,15 @@ tags:
 ---
 
 # Go Module
+
+关于go module，我们关心的有几个大问题，如何
+1. 创建一个新的module
+2. 如何引入一个module
+3. 如何和已有项目中升级成module方式。
+4. 如何升级或者管理module中的包
+5. 如何回收不用的包
+6. 常用的命令介绍
+
 ## 创建一个module
 我们先来创建一个自己的包。叫做helloworld。但是需要注意的是，不要在GOPATH路径下创建文件夹，默认来说在GOPATH路径下，module功能是关闭的。我们go module的目标之一就是消除掉GOPATH。如果你想在GOPATH下新建项目或者修改已有项目，需要打开module功能，export GO111MODULE=on。
 
@@ -173,10 +182,21 @@ import (
 )
 ```
 
-垃圾回收。go module并不会主动进行垃圾回收，例如有的包不需要了。go module自己并不会自动回收不需要的包。而是需要手动回收，运行命令。
+## 如何去除不需要的包
+垃圾回收。go module并不会主动清理`go.mod`里面不需要的文件，而是需要手动回收，运行命令。
 
 ```
  go mod tidy
+```
+
+## 如何给已有项目升级
+已有一个项目，如何从go dep升级成go module。
+
+```
+export GO111MODULE=on
+go mod init
+go build
+
 ```
 vendor文件夹，go module的目标之一就是放弃vendor，但是如果你一定想要vendor，那么还是可以做到的。`go mod vendor`,这个命令会在项目的根目录下面创建vendor文件夹，并包含我们需要的依赖包。但是`go build`的时候还是会跳过vendor，所以要依赖vendor，就需要运行`go build -mod vendor`。
 

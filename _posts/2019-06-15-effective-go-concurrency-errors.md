@@ -6,7 +6,6 @@ date:       2019-06-15 15:00:00
 author:     "会飞的蜗牛"
 header-img: "img/effective-go.jpg"
 tags:
-    - Concurrency
     - Errors
     - Effective-GO
     
@@ -457,8 +456,6 @@ func Compile(str string) (regexp *Regexp, err error) {
 有了上面的错误处理过程，调用error方法（由于它是一个类型的绑定的方法，因而即使与内建类型error同名，也不会带来什么问题，甚至是一直更加自然的用法）使得“解析错误”的报告更加方便，无需费心去考虑手工处理栈展开过程的复杂问题。
 
 
-With error handling in place, the error method (because it's a method bound to a type, it's fine, even natural, for it to have the same name as the builtin error type) makes it easy to report parse errors without worrying about unwinding the parse stack by hand:
-
 ```
 if pos == 0 {
     re.error("'*' illegal at start of expression")
@@ -469,71 +466,5 @@ if pos == 0 {
 
 顺便说一下，如果发生实际错误，这种re-panic的习惯用法会改变panic值。但是，原始故障和新故障都将显示在崩溃报告中，因此问题的根本原因依然可见。 因此，这种简单的重新启动方法通常就足够了-程序最终还是会崩溃-但如果您只想显示原始值，则可以编写更多代码来过滤意外问题并使用原始错误重新发生panic。这就留给读者课后练习吧。
 
-# A web server
-让我们完成一个完整的Go程序，实现一个Web服务。这个实际上是一类“Web reserver”，对web服务的二次封装。 Google在chart.apis.google.com上提供了一项服务，可以将数据自动格式化为图表和图形。但是，交互式使用很难，因为您需要将数据作为查询放入URL中。这里的程序为一种形式的数据提供了一个更好的界面：给定一小段文本，它调用图表服务器来生成QR码，对文本进行编码后的方型图。可以使用手机的相机抓取该图像并将其解释为例如URL，从而节省您在手机的小键盘中键入URL。
-
-下面是完成的代码。 解释如下。
-
-```
-package main
-
-import (
-    "flag"
-    "html/template"
-    "log"
-    "net/http"
-)
-
-var addr = flag.String("addr", ":1718", "http service address") // Q=17, R=18
-
-var templ = template.Must(template.New("qr").Parse(templateStr))
-
-func main() {
-    flag.Parse()
-    http.Handle("/", http.HandlerFunc(QR))
-    err := http.ListenAndServe(*addr, nil)
-    if err != nil {
-        log.Fatal("ListenAndServe:", err)
-    }
-}
-
-func QR(w http.ResponseWriter, req *http.Request) {
-    templ.Execute(w, req.FormValue("s"))
-}
-
-const templateStr = `
-<html>
-<head>
-<title>QR Link Generator</title>
-</head>
-<body>
-{{if .}}
-<img src="http://chart.apis.google.com/chart?chs=300x300&cht=qr&choe=UTF-8&chl={{.}}" />
-<br>
-{{.}}
-<br>
-<br>
-{{end}}
-<form action="/" name=f method="GET"><input maxLength=1024 size=70
-name=s value="" title="Text to QR Encode"><input type=submit
-value="Show QR" name=qr>
-</form>
-</body>
-</html>
-`
-```
-
-
-这部分代码的逻辑应该很容易看懂。addr标志为我们的服务器设置默认HTTP端口。模板变量templ是整个程序的核心逻辑，构建一个HTML模板，由服务器执行以显示页面。
-
-main函数解析标志，并使用我们上面讨论的机制将函数QR绑定到服务器的根路径。然后调用http.ListenAndServe来启动服务器，它在服务器运行时阻塞。
-
-QR只接收包含表单数据的请求，并以名为s的表单值对数据执行模板生成QR图。
-
-模板包html/template功能强大，这个程序只涉及它最基本的功能。本质上，它通过替换从传递给templ.Execute的数据项派生的元素来动态重写一段HTML文本，在本例中为表单值。 在模板文本（templateStr）中，双括号分隔的片段表示模板操作。 从`{{if.}}` 到 `{{end}}`的部分仅在调用当前数据项的值时执行。也就是` . `的值非空的时候。当字符串为空时，这一部分模板代码不会被执行。
-
-两个代码段`{{.}}`表示在网页上显示呈现给模板的数据-查询字符串。HTML模板包自动提供恰当的转义，以便文本可以安全显示。
-
-模板字符串的其余部分只是页面加载时显示的HTML。 如果这里的解释比较粗陋，请参阅`template`包的文档以进行更全面的讨论。
-
-这样你就拥有了一个有用的Web服务器，仅包含几行代码和一些数据驱动的HTML文本。 Go足够强大，可以在几行中实现一个这样的server。
+# 参考
+<https://golang.org/doc/effective_go.html>

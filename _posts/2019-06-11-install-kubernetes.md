@@ -2,7 +2,7 @@
 layout:     post
 title:      "不翻墙安装kubernetes教程"
 subtitle:   " \"Install kubernetes by Kubeadm\""
-date:       2019-06-15 20:00:00
+date:       2019-06-11 20:00:00
 author:     "会飞的蜗牛"
 header-img: "img/install-kubernetes-by-kubeadm.jpg"
 tags:

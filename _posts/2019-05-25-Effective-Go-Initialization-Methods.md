@@ -400,4 +400,3 @@ http.Handle("/args", http.HandlerFunc(ArgServer))
 
 
 ## 参考
-<https://golang.org/doc/effective_go.html>

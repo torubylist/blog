@@ -1,13 +1,13 @@
 ---
 layout:     post
 title:      "交叉编译Go程序"
-subtitle:   " \"Go Cross Compile\""
+subtitle:   " \"Go Cross Build\""
 date:       2019-06-15 20:00:00
 author:     "会飞的蜗牛"
 header-img: "img/go-cross-build.jpg"
 tags:
     - Go
-    - Cross Compile
+    - Cross Build
     
 ---
 
@@ -75,6 +75,7 @@ golang里面有两种方式来表示这种区别
 
 	```
 	// +build !linux
+	
 	package mypkg // wrong
 	```
 

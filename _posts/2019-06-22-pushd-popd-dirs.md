@@ -41,8 +41,30 @@ pushd: usage: pushd [-n] [+N | -N | dir]
 popd: usage: popd [-n] [+N | -N]
 dirs: usage: dirs [-clpv] [+N] [-N]
 ```
+2. `pushd`和`popd`不带参数,`pushd`不带参数则在链表头部的两个目录中来回切换。`popd`则表示删除链表表头节点。
 
-2. `pushd /dest/dir` 讲该目录与原目录一起压入到虚拟堆栈中。并将当前目录置于栈顶。 `popd ` 将顶目录从目录堆栈中删除。工作目录依然在剩下的栈顶中。`dirs`展示当前堆栈中的目录。
+	```
+root@dev:/vagrant_data# dirs -v
+ 0  /vagrant_data
+ 1  /home/ubuntu
+root@dev:/vagrant_data# pushd	
+/home/ubuntu /vagrant_data
+root@dev:/home/ubuntu# dirs -v
+ 0  /home/ubuntu
+ 1  /vagrant_data
+root@dev:/home/ubuntu# pushd
+/vagrant_data /home/ubuntu
+root@dev:/vagrant_data# dirs -v
+ 0  /vagrant_data
+ 1  /home/ubuntu
+root@dev:/vagrant_data# popd
+/home/ubuntu
+root@dev:/home/ubuntu# dirs -v
+ 0  /home/ubuntu
+
+	```
+
+3. `pushd /dest/dir` 讲该目录与原目录一起压入到虚拟堆栈中。并将当前目录置于栈顶。 `popd ` 将顶目录从目录堆栈中删除。工作目录依然在剩下的栈顶中。`dirs`展示当前堆栈中的目录。
 
 	```
 root@dev:~# dirs -v
@@ -81,7 +103,7 @@ root@dev:~# dirs -v
  
 	```
 
-3. `pushd [+N | -N]` 旋转目录链表。$PWD 始终在链表头部。
+4. `pushd [+N | -N]` 旋转目录链表。$PWD 始终在链表头部。
 +N: 则表示从头部开始第N号目录及后面的目录往上移。整个操作像一个环形链表一样。
 -N：则表示从尾部开始的第N号目录及后面的目录往上移。
 
@@ -107,7 +129,7 @@ root@dev:/vagrant_data# dirs -v
  3  /home/ubuntu
 	```
 
-4. `popd [+N | -N]`删除目标目录。$PWD 始终在链表头部。
+5. `popd [+N | -N]`删除目标目录。$PWD 始终在链表头部。
 +N: 则表示删除从头部开始序号为N的目录。
 -N：则表示删除从尾部开始的序号为N目录。
 

@@ -148,6 +148,13 @@ kubeadm join --token={token} {master ip}
 
 ```
 
+## 删除节点
+
+```
+$ kubeadm reset
+```
+运行这条命令还原当前节点上 kubeadm init 或者 kubeadm join 所做的所有更改。因此当你想要删除一个节点时候，就运行这条命令，但是如过你连接的是外部的etcd。那么etcd的数据将不会清除，意思是说如果你再次运行`kubeadm init`，看到的还是之前的集群。如果要清除外部etcd的数据，那么需要借助于etcdctl。`etcd del “” --prefix`。
+
 ## 总结
 
 以上，一个kubernetes集群就安装好了。

@@ -7,6 +7,8 @@ author:     "会飞的蜗牛"
 header-img: "img/english-learning.jpg"
 tags:
     - English
+    
+
 
 ### Friends
 1. pick off the weakest members of herd
@@ -30,7 +32,7 @@ tags:
 19. turn on 激起某人的兴趣，对某人有敌意
 20. gravy boat 装调料的器皿
 
-### new words
+### New words
 1. cathedral 大教堂
 2. corpse 尸体
 3. cottage 农舍，小屋

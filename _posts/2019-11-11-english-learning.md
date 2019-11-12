@@ -1,4 +1,4 @@
---
+---
 layout:     post
 title:      "Learn English with America TV shows - 1"
 subtitle:   " \"Learn English\""
@@ -7,7 +7,8 @@ author:     "会飞的蜗牛"
 header-img: "img/english-learning.jpg"
 tags:
     - English
-    
+
+---   
 
 
 ### Friends

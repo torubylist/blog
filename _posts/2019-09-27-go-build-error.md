@@ -1,4 +1,4 @@
---
+---
 layout:     post
 title:      "go build错误 stackcheck redeclared in this block"
 subtitle:   " \"Go build\""

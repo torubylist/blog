@@ -31,7 +31,7 @@ tags:
 8. caveat 警告
 9. cellulose 纤维素，维生素
 10. chandelier 吊灯
-11. degredation 降解
+11. degradation 退化；降格，降级；堕落
 12. digestive 消化
 13. fountain 喷泉
 14. graffiti 涂鸦

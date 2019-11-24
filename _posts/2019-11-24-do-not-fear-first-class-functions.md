@@ -17,7 +17,7 @@ tags:
 
 但是，几个月前，我在伦敦的Gopher会议上，听到了一些不同的意见。他们对Go新手们对函数返回函数的理解表示担忧，而这正是函数式options的基石。他们担心新手们不能完全理解这种编程模式。
 
-是的，这让我有点失落，因为我一直以为函数作为一等公民的特性是go语言最好的礼物。我们应该能够很好的加以利用。今天，我在这里通过一些实例的讲解，让你不再害怕函数式编程。
+是的，这让我有点失落，因为我一直认为函数作为一等公民的特性是go语言送给我们最好的礼物。我们应该能够很好的加以利用。今天，我会在这里通过一些实例的讲解，让你不再害怕函数式编程。
 
 ## 函数式options复盘
 一个典型的函数式options编程如下：
@@ -352,7 +352,7 @@ func (m *Mux) SendMsg(msg string) error {
         m.mu.Lock()
         defer m.mu.Unlock()
         for _, conn := range m.conns {
-                err := io.WriteString(conn, msg)
+                _, err := io.WriteString(conn, msg)
                 if err != nil {
                         return err
                 }
@@ -447,9 +447,6 @@ func (m *Mux) SendMsg(msg string) error {
         return nil
 }
 
-```
-
-```
 func (m *Mux) loop() { 
         conns := make(map[net.Addr]net.Conn)
         for op := range m.ops {
@@ -467,7 +464,7 @@ func (m *Mux) loop() { 
 func (m *Mux) SendMsg(msg string) error {
         result := make(chan error, 1)
         m.ops <- func(m map[net.Addr]net.Conn) {
-                for _, conn := range m.conns {
+                for _, conn := range m {
                         err := io.WriteString(conn, msg)
                         if err != nil {
                                 result <- err
